@@ -2,8 +2,11 @@ package DBObject;
 
 use Moo;
 use namespace::autoclean;
-
+use DBD::SQLite;
 use DBIx::Lite;
+
+#use DBIx::Lite;
+with 'DBO';
 
 has source => (
     is => 'rw',
@@ -29,19 +32,20 @@ has options => (
     },
 );
 
-sub dbh {
+sub connect {
     my $self = shift;
-    my $dbh = DBI->connect($self->source, $self->user, $self->auth, $self->options);
+    my $dbx = DBIx::Lite->new(dbh=>$self->dbh);
+    #my $dbh = DBI->connect($self->source, $self->user, $self->auth, $self->options);
+    #my $dbx = DBIx::Lite->new(dbh=>$dbh);
+    $dbx->connect($self->source, $self->user, $self->auth, $self->options);
 }
 
-sub dbx {
-    my $self = shift;
-    if ( $self->dbh ) {
-        my $dbx = DBIx::Lite->new(dbh => $self->dbh);
-    } else {
-        return;
-    }
+sub dbh {
+    my $self =shift;
+    my $dbh = DBI->connect($self->source, $self->user, $self->auth, $self->options);
+    	
 }
+
 
 
 
