@@ -6,6 +6,8 @@ use Field;
 
 use Data::Printer;
 
+with 'Schem';
+
 my $pk;
 
 has name => (
