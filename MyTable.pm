@@ -8,23 +8,23 @@ with 'Table';
 
 sub db {
 
-    DBObject->new(
-	    source=>"dbi:SQLite:dbname=test.db",
-        user=>"",
-        auth=>"",
-        options=>{sqlite_unicode => 1,RaiseError => 1, AutoCommit => 1},
-    );
+  DBObject->new(
+    source=>"dbi:SQLite:dbname=test.db",
+    user=>"",
+    auth=>"",
+    options=>{sqlite_unicode => 1,RaiseError => 1, AutoCommit => 1},
+  );
 }
 
 sub schema {
-     Schema->new(
-        name => 'company',
-        fields => [
-            Field->new(name=>'name',type=>'VARCHAR',len=>60,primary=>1),
-            Field->new(name=>'property',type=>'NUM',len=>12,default=>0.0,not_null=>1),
-            Field->new(name=>'people',type=>'NUM',len=>10,not_null=>1),
-        ],    
-    );
+  Schema->new(
+    name => 'company',
+    fields => [
+      Field->new(name=>'name',type=>'VARCHAR',len=>60,primary=>1),
+      Field->new(name=>'property',type=>'NUM',len=>12,default=>0.0,not_null=>1),
+      Field->new(name=>'people',type=>'NUM',len=>10,not_null=>1),
+    ],
+  );
 }
 
 
